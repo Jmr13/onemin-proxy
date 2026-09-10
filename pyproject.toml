@@ -1,0 +1,16 @@
+[project]
+name = "onemin-proxy"
+version = "0.1.0"
+description = "OpenAI-compatible proxy for 1min.ai"
+requires-python = ">=3.10"
+dependencies = [
+    "Flask>=3.1",
+    "requests>=2.34",
+    "python-dotenv>=1.2",
+]
+
+[project.scripts]
+onemin-proxy = "proxy:main"
+
+[tool.setuptools]
+py-modules = ["proxy"]
