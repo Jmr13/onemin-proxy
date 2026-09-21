@@ -1,0 +1,4 @@
+#!/bin/bash
+cd ~/onemin-proxy
+. .venv/bin/activate
+python proxy.py

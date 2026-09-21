@@ -20,3 +20,8 @@ if [ ! -f .env ]; then
 fi
 
 echo "Setup done. Run: source .venv/bin/activate && python proxy.py"
+
+# Create global CLI symlink
+mkdir -p "$PREFIX/bin"
+ln -sf "$(pwd)/oneminproxy" "$PREFIX/bin/oneminproxy"
+echo "Created global 'oneminproxy' command"
