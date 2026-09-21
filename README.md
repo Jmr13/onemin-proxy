@@ -29,7 +29,7 @@ Server starts on `http://0.0.0.0:3001`.
 
 | Method | Path                 | Description        |
 |--------|----------------------|--------------------|
-| POST   | `/v1/chat/completions` | Chat completion (OpenAI format) |
+| POST   | `/v1/chat/completions` | Chat completion (OpenAI format, streaming supported) |
 | POST   | `/chat/completions`    | Same, shorter path  |
 | POST/GET | `/v1/models`       | List allowed models |
 
@@ -43,11 +43,22 @@ client = OpenAI(
     api_key="unused",
 )
 
+# Non-streaming
 resp = client.chat.completions.create(
     model="gpt-4o",
     messages=[{"role": "user", "content": "Hello"}],
 )
 print(resp.choices[0].message.content)
+
+# Streaming
+stream = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[{"role": "user", "content": "Hello"}],
+    stream=True,
+)
+for chunk in stream:
+    if chunk.choices[0].delta.content:
+        print(chunk.choices[0].delta.content, end="")
 ```
 
 ## Environment Variables
